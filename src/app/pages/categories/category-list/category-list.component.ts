@@ -19,12 +19,15 @@ export class CategoryListComponent implements OnInit {
     );
   }
   deleteCategory(category) {
-    this.CategoryService.delete(category.id).subscribe(
-      () =>
-        (this.categories = this.categories.filter(
-          element => element != category
-        )),
-      () => alert("erro ao tentar excluir")
-    );
+    const mustDelete = confirm("Deseja realmente excluir essa categoria?");
+    if (mustDelete) {
+      this.CategoryService.delete(category.id).subscribe(
+        () =>
+          (this.categories = this.categories.filter(
+            element => element != category
+          )),
+        () => alert("erro ao tentar excluir")
+      );
+    }
   }
 }
